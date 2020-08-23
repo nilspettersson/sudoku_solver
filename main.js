@@ -10,10 +10,33 @@ var array =[[0,0,0,0,0,0,0,0,0],
 
 var solutions = 0;
 
+var bord = generateBord(20);
+console.log(bord);
 
-solve(1, array);
+//solve(1, array);
 
 
+
+function generateBord(numberAmount){
+    var bord = [];
+    for(var y = 0; y < 9; y++){
+        bord.push([]);
+        for(var x = 0; x < 9; x++){
+            bord[y].push(0);
+        }
+    }
+    while(numberAmount > 0){
+        var x = parseInt(Math.random()*9, 10);
+        var y = parseInt(Math.random()*9, 10);
+        var n = parseInt(Math.random()*9, 10) + 1;
+        if(possible(x, y, n, bord) && bord[x][y] == 0){
+            bord[x][y] = n;
+            numberAmount--;
+        }
+        
+    }
+    return bord;
+}
 
 function possible(x, y, num, bord){
     //check vertical.
