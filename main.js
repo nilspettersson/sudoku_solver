@@ -1,19 +1,19 @@
-var array =[[0,0,0,0,0,0,0,0,0],
+var array =[[5,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,3,4,0,0,0],
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0]];
 
 var solutions = 0;
 
-var bord = generateBord(20);
+var bord = generateBord(60);
 console.log(bord);
 
-//solve(1, array);
+//solve(1, bord);
 
 
 
@@ -29,9 +29,33 @@ function generateBord(numberAmount){
         var x = parseInt(Math.random()*9, 10);
         var y = parseInt(Math.random()*9, 10);
         var n = parseInt(Math.random()*9, 10) + 1;
-        if(possible(x, y, n, bord) && bord[x][y] == 0){
-            bord[x][y] = n;
-            numberAmount--;
+        if(possible(x, y, n, bord) && bord[y][x] == 0){
+            bord[y][x] = n;
+
+            var bordSolve = [];
+            for(var i = 0; i < 9; i++){
+                bordSolve.push([]);
+                for(var j = 0; j < 9; j++){
+                    bordSolve[i].push(0);
+                }
+            }
+
+            for(var i = 0; i <  bord.length; i++){
+                for(var j = 0; j < bord[i].length; j++){
+                    bordSolve[i][j] = bord[i][j];
+                }
+            }
+
+            //check if the bord can be solved.
+            if(solve(1, bordSolve)){
+                numberAmount--;
+            }
+            else{
+                console.log(x +"  "+y + "  "+n + "noooooooooo");
+                bord[y][x] = 0;
+            }
+
+            
         }
         
     }
@@ -78,7 +102,7 @@ function possible(x, y, num, bord){
 
 function solve(maxSolutions, bord){
     if(solutions >= maxSolutions){
-        return;
+        return true;
     }
     //loop through grid.
     for(var y = 0; y <  bord.length; y++){
@@ -89,13 +113,19 @@ function solve(maxSolutions, bord){
             for(var n = 1; n < 10; n++){
                 if(possible(x, y, n, bord)){
                     bord[y][x] = n;
-                    solve(maxSolutions, bord);
+                    if(solve(maxSolutions, bord)){
+                        return true;
+                    }
+
                     if(solutions < maxSolutions){
                         bord[y][x] = 0;
                     }
+                    else{
+                        return true;
+                    }
                 }
             }
-            return;
+            return false;
         }
     }
     var answer = [];
@@ -107,6 +137,8 @@ function solve(maxSolutions, bord){
     }
     solutions++;
     console.log(answer);
+
+    return true;
     
 }
 
