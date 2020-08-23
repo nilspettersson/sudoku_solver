@@ -9,12 +9,29 @@ var array =[[5,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0]];
 
 var solutions = 0;
+var solved = false;
 
-var bord = generateBord(60);
+var bord = generateBord(22);
 console.log(bord);
 
-//solve(1, bord);
+solved = false;
 
+
+var bordSolve2 = [];
+for(var i = 0; i < 9; i++){
+    bordSolve2.push([]);
+    for(var j = 0; j < 9; j++){
+        bordSolve2[i].push(0);
+    }
+}
+for(var i = 0; i <  bord.length; i++){
+    for(var j = 0; j < bord[i].length; j++){
+        bordSolve2[i][j] = bord[i][j];
+    }
+}
+
+isSolvable(bordSolve2);
+console.log(bordSolve2);
 
 
 function generateBord(numberAmount){
@@ -32,6 +49,7 @@ function generateBord(numberAmount){
         if(possible(x, y, n, bord) && bord[y][x] == 0){
             bord[y][x] = n;
 
+            //temp bord.
             var bordSolve = [];
             for(var i = 0; i < 9; i++){
                 bordSolve.push([]);
@@ -39,25 +57,19 @@ function generateBord(numberAmount){
                     bordSolve[i].push(0);
                 }
             }
-
             for(var i = 0; i <  bord.length; i++){
                 for(var j = 0; j < bord[i].length; j++){
                     bordSolve[i][j] = bord[i][j];
                 }
             }
-
             //check if the bord can be solved.
-            if(solve(1, bordSolve)){
+            if(isSolvable(bordSolve)){
                 numberAmount--;
             }
             else{
-                console.log(x +"  "+y + "  "+n + "noooooooooo");
                 bord[y][x] = 0;
             }
-
-            
         }
-        
     }
     return bord;
 }
@@ -100,7 +112,7 @@ function possible(x, y, num, bord){
 }
 
 
-function solve(maxSolutions, bord){
+/*function solve(maxSolutions, bord){
     if(solutions >= maxSolutions){
         return true;
     }
@@ -135,12 +147,57 @@ function solve(maxSolutions, bord){
             answer[y].push(bord[y][x]);
         }
     }
-    solutions++;
     console.log(answer);
+    solutions++;
+    return true;
+    
+}*/
+
+function isSolvable(bord){
+    if(solved){
+        return true;
+    }
+    //loop through grid.
+    for(var y = 0; y <  bord.length; y++){
+        for(var x = 0; x < bord[y].length; x++){
+            if(bord[y][x] != 0){
+                continue;
+            }
+            for(var n = 1; n < 10; n++){
+                if(possible(x, y, n, bord)){
+                    bord[y][x] = n;
+                    if(isSolvable(bord)){
+                        return true;
+                    }
+
+                    if(solved == false){
+                        bord[y][x] = 0;
+                    }
+                    else{
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+        
+    }
+    console.log("works");
+    //console.log(bord);
+    var answer = [];
+    for(var y = 0; y <  bord.length; y++){
+        answer.push([])
+        for(var x = 0; x < bord[y].length; x++){
+            answer[y].push(bord[y][x]);
+        }
+    }
+    
+    solved = true;
 
     return true;
     
 }
+
 
 function isValid(bord){
     for(var y = 0; y <  bord.length; y++){
