@@ -73,3 +73,41 @@ button:hover{
     box-shadow: rgb(192, 192, 192) 0px 0px 0px;
 }
 
+@media only screen and (max-width: 1200px){
+    .grid{
+        grid-template-columns: 1fr;
+        margin-top: 60px;
+    }
+
+    .sudoku{
+        margin:auto;
+        width:500px;
+        height:500px;
+        border: rgb(70, 70, 70) 2px solid;
+    }
+
+    .right{
+        padding: 0px;
+        padding-top: 30px;
+        margin: auto;
+    }
+
+    button{
+        border: none;
+        display: inline-block;
+        padding: 18px 0px;
+        width: 180px;
+        margin: 10px;
+        background: #4090ED;
+        color: white;
+        font-size: 24px;
+        border-radius: 12px;
+        box-shadow: rgb(187, 187, 187) 0px 4px 4px;
+        transition-property: background;
+    }
+    button:hover{
+        transition-duration: 160ms;
+        background: #357ac9;
+        box-shadow: rgb(192, 192, 192) 0px 0px 0px;
+    }
+}
