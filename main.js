@@ -64,6 +64,9 @@ function init(){
     
 
     document.getElementById("clear").onclick = function(){clear()};
+    document.getElementById("generate").onclick = function(){generate()};
+    document.getElementById("solve").onclick = function(){solve()};
+
 
 }
 
@@ -78,6 +81,22 @@ function clear(){
     }
 }
 
+function generate(){
+    clear();
+    var bord = generateBord(20);
+
+    var rows = document.getElementsByClassName("row");
+    for(var i = 0; i < rows.length; i++){
+        var row = document.getElementsByClassName("row")[i];
+        for(var j = 0; j < row.childNodes.length; j++){
+            if(bord[i][j] == 0){
+                //continue;
+            }
+            row.childNodes[j].childNodes[0].value = bord[i][j];
+            console.log(row.childNodes[j].childNodes[0]);
+        }
+    }
+}
 
 
 
