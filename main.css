@@ -35,3 +35,41 @@ a:hover{
 .active{
     color: rgb(158, 158, 158);
 }
+
+
+.grid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 100px;
+}
+
+.sudoku{
+    margin-right: 0px;
+    margin-left: auto;
+    width:600px;
+    height:600px;
+    border: rgb(70, 70, 70) 2px solid;
+}
+.right{
+    padding-left: 60px;
+}
+
+button{
+    border: none;
+    display: block;
+    padding: 18px 0px;
+    width: 240px;
+    margin: 28px;
+    background: #4090ED;
+    color: white;
+    font-size: 28px;
+    border-radius: 12px;
+    box-shadow: rgb(187, 187, 187) 0px 4px 4px;
+    transition-property: background;
+}
+button:hover{
+    transition-duration: 160ms;
+    background: #357ac9;
+    box-shadow: rgb(192, 192, 192) 0px 0px 0px;
+}
+
