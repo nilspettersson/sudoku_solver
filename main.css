@@ -21,15 +21,17 @@ body{
     display: inline-block;
     background: #3A3A3A;
     color:white;
-    
 }
-.menu a{
+a{
     padding: 30px;
     text-decoration: none;
     color: white;
     font-size: 24px;
 }
-.menu a:hover{
+a:hover{
     transition-duration: 180ms;
+    color: rgb(158, 158, 158);
+}
+.active{
     color: rgb(158, 158, 158);
 }
