@@ -95,6 +95,7 @@ a:hover{
 
 button{
     border: none;
+    outline:none;
     display: block;
     padding: 18px 0px;
     width: 240px;

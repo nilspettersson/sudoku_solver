@@ -76,7 +76,6 @@ function clear(){
         var row = document.getElementsByClassName("row")[i];
         for(var j = 0; j < row.childNodes.length; j++){
             row.childNodes[j].childNodes[0].value = "";
-            console.log(row.childNodes[j].childNodes[0]);
         }
     }
 }
@@ -90,16 +89,50 @@ function generate(){
         var row = document.getElementsByClassName("row")[i];
         for(var j = 0; j < row.childNodes.length; j++){
             if(bord[i][j] == 0){
-                //continue;
+                continue;
             }
             row.childNodes[j].childNodes[0].value = bord[i][j];
-            console.log(row.childNodes[j].childNodes[0]);
         }
     }
 }
 
 
 
+function solve(){
+    var bord = [];
+    var rows = document.getElementsByClassName("row");
+    for(var i = 0; i < rows.length; i++){
+        bord.push([]);
+        var row = document.getElementsByClassName("row")[i];
+        for(var j = 0; j < row.childNodes.length; j++){
+            if(row.childNodes[j].childNodes[0].value == ""){
+                bord[i].push(0);
+            }
+            else{
+                var value = parseInt(row.childNodes[j].childNodes[0].value, 10);
+                bord[i].push(value);
+            }
+        }
+    }
+
+    if(isSolvable(bord) == 1){
+        var rows = document.getElementsByClassName("row");
+        for(var i = 0; i < rows.length; i++){
+            var row = document.getElementsByClassName("row")[i];
+            for(var j = 0; j < row.childNodes.length; j++){
+                if(bord[i][j] == 0){
+                    continue;
+                }
+                row.childNodes[j].childNodes[0].value = bord[i][j];
+            }
+        }
+    }
+    else{
+        console.log("could not solve sudoku");
+    }
+
+
+}
 
 
 
