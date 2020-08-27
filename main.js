@@ -1,4 +1,4 @@
-var array =[[5,5,0,0,0,0,0,0,0],
+/*var array =[[5,5,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
@@ -27,6 +27,50 @@ for(var i = 0; i <  bord.length; i++){
 
 console.log(isSolvable(bordSolve2));
 console.log(bordSolve2);
+*/
+
+
+
+function init(){
+    
+    
+
+    var sudoku = document.getElementsByClassName("sudoku")[0];
+
+    for(var i = 0; i < 9; i++){
+        var row = document.createElement("tr");
+        row.classList.add("row");    
+        if((i+1) % 3 == 0){
+            row.classList.add("row-divider");
+        }
+        for(var j = 0; j < 9; j++){
+            var cell = document.createElement("td");
+            cell.classList.add("cell");
+            if((j+1) % 3 == 0){
+                cell.classList.add("cell-divider");
+            }
+
+            var input = document.createElement("input");
+            input.classList.add("cell-input");
+            input.type = "text";
+            input.maxLength = "1";
+            input.oninput= function (){
+                this.value=this.value.replace(/[^1-9]/g,'');
+            };
+            cell.append(input);
+
+            row.append(cell);
+        }
+        sudoku.append(row);
+    }
+    
+
+}
+
+
+
+
+
 
 
 function generateBord(numberAmount){

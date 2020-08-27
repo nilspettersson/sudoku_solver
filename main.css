@@ -41,15 +41,54 @@ a:hover{
     display: grid;
     grid-template-columns: 1fr 1fr;
     margin-top: 100px;
+    padding: 0px 40px;
 }
 
 .sudoku{
+    border-spacing:0px;
+    margin: 0px auto;
     margin-right: 0px;
-    margin-left: auto;
-    width:600px;
-    height:600px;
-    border: rgb(70, 70, 70) 2px solid;
+    border: rgb(70, 70, 70) 6px solid;
+    border-radius: 8px;
 }
+
+.row{
+    display: block;
+}
+.row-divider{
+    border-bottom: rgb(70, 70, 70) 4px solid;
+}
+.cell{
+    padding: 0px;
+    margin: 0px;
+    border: rgb(70, 70, 70) 1px solid;
+    width: 60px;
+    height: 60px;
+    background: rgb(255, 255, 255);
+}
+.cell-divider{
+    border-right: rgb(70, 70, 70) 4px solid;
+}
+
+.cell-input{
+    outline: none;
+    border: none;
+    font-size: 44px;
+    color: rgb(70, 70, 70);
+    text-align: center;
+    width: 60px;
+    height: 60px;
+}
+.cell-input:hover{
+    cursor: pointer;
+    background:#4091ed2f;
+}
+.cell-input:focus{
+    cursor: pointer;
+    background:#4091ed2f;
+}
+
+
 .right{
     padding-left: 60px;
 }
@@ -73,17 +112,19 @@ button:hover{
     box-shadow: rgb(192, 192, 192) 0px 0px 0px;
 }
 
-@media only screen and (max-width: 1200px){
+@media only screen and (max-width: 1040px){
     .grid{
         grid-template-columns: 1fr;
         margin-top: 60px;
     }
 
     .sudoku{
-        margin:auto;
-        width:500px;
-        height:500px;
-        border: rgb(70, 70, 70) 2px solid;
+        margin: 0px auto;
+    }
+
+    .cell{
+        width: 40px;
+        height: 40px;
     }
 
     .right{
