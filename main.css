@@ -16,12 +16,21 @@ body{
     font-size: 20px;
     color:white;
 }
+
+.hamburger{
+    display: none;
+}
+.toggle{
+    display: none;
+}
+
 .menu{
     padding-left: 40px;
     display: inline-block;
     background: #3A3A3A;
     color:white;
 }
+
 a{
     padding: 30px;
     text-decoration: none;
@@ -32,10 +41,10 @@ a:hover{
     transition-duration: 180ms;
     color: rgb(158, 158, 158);
 }
-.active{
-    color: rgb(158, 158, 158);
-}
 
+.active{
+    color: rgb(184, 184, 184);
+}
 
 .grid{
     display: grid;
@@ -62,8 +71,6 @@ a:hover{
     padding: 0px;
     margin: 0px;
     border: rgb(70, 70, 70) 1px solid;
-    width: 60px;
-    height: 60px;
     background: rgb(255, 255, 255);
 }
 .cell-divider{
@@ -123,33 +130,133 @@ button:hover{
         margin: 0px auto;
     }
 
-    .cell{
-        width: 40px;
-        height: 40px;
+    .cell-input{
+        width: 50px;
+        height: 50px;
     }
 
     .right{
         padding: 0px;
-        padding-top: 30px;
+        padding-top: 28px;
         margin: auto;
     }
 
     button{
         border: none;
         display: inline-block;
-        padding: 18px 0px;
-        width: 180px;
-        margin: 10px;
-        background: #4090ED;
+        padding: 12px 0px;
+        width: 100px;
+        margin: 6px;
+        font-size: 20px;
+    }
+}
+
+@media only screen and (max-width: 720px){
+    .cell-input{
+        width: 38px;
+        height: 38px;
+    }
+
+    .active{
         color: white;
-        font-size: 24px;
-        border-radius: 12px;
-        box-shadow: rgb(187, 187, 187) 0px 4px 4px;
-        transition-property: background;
     }
-    button:hover{
-        transition-duration: 160ms;
-        background: #357ac9;
-        box-shadow: rgb(192, 192, 192) 0px 0px 0px;
+
+    .active::before{
+        position: relative;
+        right: 20px;
+        content: "";
+        width: 80px;
+        height: 80px;
+        border-left: solid rgba(255, 255, 255, 0.459) 2px;
+        color: rgb(216, 216, 216);
     }
+
+
+    .toggle{
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 2;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        margin: 20px;
+        opacity: 0;
+    }
+
+    .menu{
+        margin: auto;
+        display: none;
+        position: absolute;
+        top: 102px;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #3a3a3aea;
+        padding: 0px;
+        padding-top: 200px;
+    }
+    .menu a{
+        text-align: center;
+        margin-top:38px;
+        padding: 0px;
+        display: block;
+    }
+
+    .hamburger{
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+        width: 50px;
+        height: 50px;
+        padding: 20px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hamburger > div{
+        position: relative;
+        width: 100%;
+        height: 2px;
+        background: white;
+        display: flex;
+        align-items: center;
+        justify-items: center;
+        transition:all 400ms ease;
+    }
+
+    .hamburger > div::before,
+    .hamburger > div::after{
+        content: "";
+        position: absolute;
+        z-index: 1;
+        top: -12px;
+        width: 100%;
+        height: 2px;
+        background: inherit;
+    }
+    .hamburger > div::after{
+        top: 12px;
+    }
+
+    .toggle:checked + .hamburger > div{
+        transform: rotate(135deg);
+    }
+
+    .toggle:checked + .hamburger > div:before,
+    .toggle:checked + .hamburger > div:after{
+        transition: 200ms ease;
+        top: 0;
+        transform: rotate(90deg);
+    }
+
+    .toggle:checked ~ .menu{
+        display: block;
+    }
+    
+
 }
