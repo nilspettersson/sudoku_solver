@@ -1,4 +1,4 @@
-var array =[[5,0,0,0,0,0,0,0,0],
+var array =[[5,5,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
@@ -8,14 +8,9 @@ var array =[[5,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0]];
 
-var solutions = 0;
-var solved = false;
 
-var bord = generateBord(22);
+var bord = generateBord(26);
 console.log(bord);
-
-solved = false;
-
 
 var bordSolve2 = [];
 for(var i = 0; i < 9; i++){
@@ -30,7 +25,7 @@ for(var i = 0; i <  bord.length; i++){
     }
 }
 
-isSolvable(bordSolve2);
+console.log(isSolvable(bordSolve2));
 console.log(bordSolve2);
 
 
@@ -42,6 +37,7 @@ function generateBord(numberAmount){
             bord[y].push(0);
         }
     }
+
     while(numberAmount > 0){
         var x = parseInt(Math.random()*9, 10);
         var y = parseInt(Math.random()*9, 10);
@@ -63,7 +59,7 @@ function generateBord(numberAmount){
                 }
             }
             //check if the bord can be solved.
-            if(isSolvable(bordSolve)){
+            if(isSolvable(bordSolve) == 1){
                 numberAmount--;
             }
             else{
@@ -84,7 +80,6 @@ function possible(x, y, num, bord){
             return false;
         }
     }
-    
     //check horizontal.
     for(var i = 0; i < bord[y].length; i++){
         if(i == x){
@@ -107,14 +102,12 @@ function possible(x, y, num, bord){
             }
         }
     }
-
     return true;
 }
 
-
-/*function solve(maxSolutions, bord){
-    if(solutions >= maxSolutions){
-        return true;
+function isSolvable(bord, depth = 0){
+    if(depth == 0 && isValid(bord) == false){
+        return 2;
     }
     //loop through grid.
     for(var y = 0; y <  bord.length; y++){
@@ -125,85 +118,35 @@ function possible(x, y, num, bord){
             for(var n = 1; n < 10; n++){
                 if(possible(x, y, n, bord)){
                     bord[y][x] = n;
-                    if(solve(maxSolutions, bord)){
-                        return true;
+                    
+                    var status = isSolvable(bord, depth + 1);
+                    if(status == 1){
+                        return 1;
                     }
-
-                    if(solutions < maxSolutions){
+                    else if(status == 2){
                         bord[y][x] = 0;
-                    }
-                    else{
-                        return true;
                     }
                 }
             }
-            return false;
-        }
-    }
-    var answer = [];
-    for(var y = 0; y <  bord.length; y++){
-        answer.push([])
-        for(var x = 0; x < bord[y].length; x++){
-            answer[y].push(bord[y][x]);
-        }
-    }
-    console.log(answer);
-    solutions++;
-    return true;
-    
-}*/
-
-function isSolvable(bord){
-    if(solved){
-        return true;
-    }
-    //loop through grid.
-    for(var y = 0; y <  bord.length; y++){
-        for(var x = 0; x < bord[y].length; x++){
-            if(bord[y][x] != 0){
-                continue;
+            if(depth == 0){
+                return 2;
             }
-            for(var n = 1; n < 10; n++){
-                if(possible(x, y, n, bord)){
-                    bord[y][x] = n;
-                    if(isSolvable(bord)){
-                        return true;
-                    }
-
-                    if(solved == false){
-                        bord[y][x] = 0;
-                    }
-                    else{
-                        return true;
-                    }
-                }
-            }
-            return false;
+            return 0;
         }
         
     }
-    console.log("works");
-    //console.log(bord);
-    var answer = [];
-    for(var y = 0; y <  bord.length; y++){
-        answer.push([])
-        for(var x = 0; x < bord[y].length; x++){
-            answer[y].push(bord[y][x]);
-        }
-    }
-    
-    solved = true;
 
-    return true;
-    
+    return 1;
 }
 
 
 function isValid(bord){
     for(var y = 0; y <  bord.length; y++){
         for(var x = 0; x < bord[y].length; x++){
+            if(bord[y][x] == 0){
+                continue;
+            }
             if(possible(x, y, bord[y][x], bord) == false){
-                console.log(x + "  " + y + "  num:" + bord[y][x]);
                 return false;
             }
         }
