@@ -81,11 +81,11 @@ a:hover{
 }
 .cell-input:hover{
     cursor: pointer;
-    background:#4091ed2f;
+    background:#2643641c;
 }
 .cell-input:focus{
     cursor: pointer;
-    background:#4091ed2f;
+    background:#2643641c;
 }
 
 

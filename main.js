@@ -32,8 +32,6 @@ console.log(bordSolve2);
 
 
 function init(){
-    
-    
 
     var sudoku = document.getElementsByClassName("sudoku")[0];
 
@@ -65,7 +63,21 @@ function init(){
     }
     
 
+    document.getElementById("clear").onclick = function(){clear()};
+
 }
+
+function clear(){
+    var rows = document.getElementsByClassName("row");
+    for(var i = 0; i < rows.length; i++){
+        var row = document.getElementsByClassName("row")[i];
+        for(var j = 0; j < row.childNodes.length; j++){
+            row.childNodes[j].childNodes[0].value = "";
+            console.log(row.childNodes[j].childNodes[0]);
+        }
+    }
+}
+
 
 
 
