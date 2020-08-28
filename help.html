@@ -11,7 +11,6 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto' rel='noreferrer' type='text/css'>
 
         <link rel="stylesheet" href="main.css">
-        <script src="main.js"></script>
     </head>
     <body onload="init()">
 
@@ -28,25 +27,22 @@
             
             <div class="menu">
                 <div>
-                    <a class="active" href="index.html">Home</a>
-                    <a href="help.html">Help</a>
+                    <a href="index.html">Home</a>
+                    <a class="active" href="#">Help</a>
                     <a target="_blank" href="https://github.com/nilspettersson/sudoku_solver">Code</a>
                 </div>
             </div>
         </div>
 
-        <div class="grid">
-            <div class="left">
-                <table class="sudoku">
+        <div class="help">
+            <h1>Sudoku Help</h1>
+            <div>
+                <h2>Rules</h2>
+                <p>Sudoku involves a grid of 81 squares. The grid is divided into nine blocks and each block contains nine squares. Each of the nine blocks has to contain numbers between 1-9. every number in a block should be unique. Each number can only appear once in a row and a column. </p>
+                <h2>How to play</h2>
+                <p>To play Sudoku on this site click the generate button. This will create a game of Sudoku with only one solution. If you want to see what the solution is you can click the solve button.</p>
 
-                </table>
             </div>
-            <div class="right">
-                <button id="solve">Solve</button>
-                <button id="generate">Generate</button>
-                <button id="clear">Clear</button>
-            </div>
-
         </div>
 
 
