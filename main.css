@@ -15,6 +15,7 @@ body{
     padding: 0px 60px;
     font-size: 20px;
     color:white;
+    line-height: 0.7;
 }
 
 .hamburger{
@@ -152,9 +153,15 @@ button:hover{
 }
 
 @media only screen and (max-width: 720px){
+    .header{
+       padding: 0px 30px;
+    }
+
+
     .cell-input{
         width: 34px;
         height: 34px;
+        font-size: 30px;
     }
 
     .active{
@@ -164,24 +171,8 @@ button:hover{
         position: relative;
         right: 20px;
         content: "";
-        width: 80px;
-        height: 80px;
-        border-left: solid rgba(255, 255, 255, 0.459) 2px;
+        border-left: solid rgba(255, 255, 255, 0.575) 3px;
         color: rgb(216, 216, 216);
-    }
-
-
-    .toggle{
-        display: block;
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 2;
-        cursor: pointer;
-        width: 50px;
-        height: 50px;
-        margin: 20px;
-        opacity: 0;
     }
 
     .menu{
@@ -208,14 +199,26 @@ button:hover{
         margin-top: 320px;
     }
 
+    .toggle{
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        z-index: 2;
+        cursor: pointer;
+        width: 50px;
+        height: 50px;
+        margin: 8px;
+        opacity: 0;
+    }
     .hamburger{
         position: absolute;
         top: 10px;
-        right: 10px;
+        right: 20px;
         z-index: 1;
         width: 50px;
         height: 50px;
-        padding: 20px;
+        padding: 8px;
 
         display: flex;
         align-items: center;
