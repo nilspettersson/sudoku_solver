@@ -1,5 +1,4 @@
 function init(){
-
     var sudoku = document.getElementsByClassName("sudoku")[0];
 
     for(var i = 0; i < 9; i++){
@@ -28,13 +27,10 @@ function init(){
         }
         sudoku.append(row);
     }
-    
 
     document.getElementById("clear").onclick = function(){clear()};
     document.getElementById("generate").onclick = function(){generate()};
     document.getElementById("solve").onclick = function(){solve()};
-
-
 }
 
 function clear(){
@@ -49,8 +45,17 @@ function clear(){
 
 function generate(){
     clear();
-    var bord = generateBord(16);
+    var bord = [];
+    for(var y = 0; y < 9; y++){
+        bord.push([]);
+        for(var x = 0; x < 9; x++){
+            bord[y].push(0);
+        }
+    }
+    createRandomSolution(bord);
+    removeFromBord(bord, 40);
 
+    //adds bord to the html bord.
     var rows = document.getElementsByClassName("row");
     for(var i = 0; i < rows.length; i++){
         var row = document.getElementsByClassName("row")[i];
@@ -63,8 +68,32 @@ function generate(){
     }
 }
 
+//removes values from a solved bord and makes sure that the bord still only has one solution. 
+function removeFromBord(bord, amount){
+    while(amount > 0){
+        var x = Math.floor(Math.random() * 9);
+        var y = Math.floor(Math.random() * 9);
+        if(bord[y][x] != 0){
+            var tempbord = [];
+            for(var i = 0; i < 9; i++){
+                tempbord.push([]);
+                for(var j = 0; j < 9; j++){
+                    tempbord[i].push(bord[i][j]);
+                }
+            }
+            tempbord[y][x] = 0;
 
+            getSolutionCount(tempbord);
+            if(solutionCount == 1){
+                amount--;
+                bord[y][x] = 0;
+            }
+        }
+    }
 
+}
+
+//solves the current bord.
 function solve(){
     var bord = [];
     var rows = document.getElementsByClassName("row");
@@ -101,54 +130,6 @@ function solve(){
 }
 
 
-
-
-function generateBord(numberAmount){
-    var initNumberAmount = numberAmount;
-
-    var hasSolution = false;
-    while(hasSolution == false){
-        var bord = [];
-        for(var y = 0; y < 9; y++){
-            bord.push([]);
-            for(var x = 0; x < 9; x++){
-                bord[y].push(0);
-            }
-        }
-        
-        while(numberAmount > 0){
-            var x = parseInt(Math.random()*9, 10);
-            var y = parseInt(Math.random()*9, 10);
-            var n = parseInt(Math.random()*9, 10) + 1;
-            if(possible(x, y, n, bord) && bord[y][x] == 0){
-                bord[y][x] = n;
-
-                //temp bord.
-                var bordSolve = [];
-                for(var i = 0; i < 9; i++){
-                    bordSolve.push([]);
-                    for(var j = 0; j < 9; j++){
-                        bordSolve[i].push(0);
-                    }
-                }
-                for(var i = 0; i <  bord.length; i++){
-                    for(var j = 0; j < bord[i].length; j++){
-                        bordSolve[i][j] = bord[i][j];
-                    }
-                }
-                numberAmount--;
-            }
-        }
-        if(isSolvable(bordSolve) != 1){
-            numberAmount = initNumberAmount;
-        }
-        else{
-            hasSolution = true;
-        }
-    }
-    return bord;
-}
-
 function possible(x, y, num, bord){
     //check vertical.
     for(var i = 0; i < bord.length; i++){
@@ -184,8 +165,8 @@ function possible(x, y, num, bord){
     return true;
 }
 
-function isSolvable(bord, depth = 0){
-    if(depth == 0 && isValid(bord) == false){
+function isSolvable(bord){
+    if(isValid(bord) == false){
         return 2;
     }
     //loop through grid.
@@ -198,7 +179,7 @@ function isSolvable(bord, depth = 0){
                 if(possible(x, y, n, bord)){
                     bord[y][x] = n;
                     
-                    var status = isSolvable(bord, depth + 1);
+                    var status = isSolvable(bord);
                     if(status == 1){
                         return 1;
                     }
@@ -207,17 +188,89 @@ function isSolvable(bord, depth = 0){
                     }
                 }
             }
-            if(depth == 0){
+            return 2;
+        }
+    }
+    return 1;
+}
+
+
+var solutionCount = 0;
+function getSolutionCount(bord, depth = 0){
+    if(depth == 0){
+        solutionCount = 0;
+    }
+    if(isValid(bord) == false){
+        return 2;
+    }
+    //loop through grid.
+    for(var y = 0; y <  bord.length; y++){
+        for(var x = 0; x < bord[y].length; x++){
+            if(bord[y][x] != 0){
+                continue;
+            }
+            for(var n = 1; n < 10; n++){
+                if(possible(x, y, n, bord)){
+                    bord[y][x] = n;
+                    
+                    var status = getSolutionCount(bord, depth + 1);
+
+                    bord[y][x] = 0;
+                }
+            }
+            /*if(depth == 0){
                 return 2;
+            }*/
+            return 2;
+        }
+    }
+    solutionCount++;
+    return 1;
+}
+
+
+//creates a complete sudoku.
+function createRandomSolution(bord){
+    if(isValid(bord) == false){
+        return 2;
+    }
+
+    for(var y = 0; y <  bord.length; y++){
+        for(var x = 0; x < bord[y].length; x++){
+            if(bord[y][x] != 0){
+                continue;
+            }
+            var numbers = getRandomNumberList();
+            for(var n = 0; n < 9; n++){
+                if(possible(x, y, numbers[n], bord)){
+                    bord[y][x] = numbers[n];
+                    
+                    var status = createRandomSolution(bord);
+                    if(status == 1){
+                        return 1;
+                    }
+                    else if(status == 2){
+                        bord[y][x] = 0;
+                    }
+                }
             }
             return 2;
         }
         
     }
-
     return 1;
 }
 
+function getRandomNumberList(){
+    var numbers = [1,2,3,4,5,6,7,8,9];
+    for(var i = 0; i < numbers.length; i++){
+        var num = numbers[i];
+        var num2 = Math.floor(Math.random() * 9);
+        numbers[i] = numbers[num2];
+        numbers[num2] = num;
+    }
+    return numbers;
+}
 
 function isValid(bord){
     for(var y = 0; y <  bord.length; y++){
