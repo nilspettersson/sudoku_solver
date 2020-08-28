@@ -1,36 +1,3 @@
-/*var array =[[5,5,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,3,4,0,0,0],
-            [0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0]];
-
-
-var bord = generateBord(26);
-console.log(bord);
-
-var bordSolve2 = [];
-for(var i = 0; i < 9; i++){
-    bordSolve2.push([]);
-    for(var j = 0; j < 9; j++){
-        bordSolve2[i].push(0);
-    }
-}
-for(var i = 0; i <  bord.length; i++){
-    for(var j = 0; j < bord[i].length; j++){
-        bordSolve2[i][j] = bord[i][j];
-    }
-}
-
-console.log(isSolvable(bordSolve2));
-console.log(bordSolve2);
-*/
-
-
-
 function init(){
 
     var sudoku = document.getElementsByClassName("sudoku")[0];
@@ -38,13 +5,13 @@ function init(){
     for(var i = 0; i < 9; i++){
         var row = document.createElement("tr");
         row.classList.add("row");    
-        if((i+1) % 3 == 0){
+        if((i+1) % 3 == 0 && i < 8){
             row.classList.add("row-divider");
         }
         for(var j = 0; j < 9; j++){
             var cell = document.createElement("td");
             cell.classList.add("cell");
-            if((j+1) % 3 == 0){
+            if((j+1) % 3 == 0 && j < 8){
                 cell.classList.add("cell-divider");
             }
 
@@ -114,7 +81,6 @@ function solve(){
             }
         }
     }
-
     if(isSolvable(bord) == 1){
         var rows = document.getElementsByClassName("row");
         for(var i = 0; i < rows.length; i++){
@@ -239,7 +205,7 @@ function isSolvable(bord, depth = 0){
             if(depth == 0){
                 return 2;
             }
-            return 0;
+            return 2;
         }
         
     }
