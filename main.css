@@ -117,8 +117,9 @@ button{
     transition-property: background;
 }
 button:hover{
+    cursor: pointer;
     transition-duration: 160ms;
-    background: #357ac9;
+    background: #245286;
     box-shadow: rgb(192, 192, 192) 0px 0px 0px;
 }
 
@@ -157,6 +158,12 @@ button:hover{
        padding: 0px 30px;
     }
 
+    button{
+        padding: 10px 0px;
+        width: 80px;
+        margin: 4px;
+        font-size: 16px;
+    }
 
     .cell-input{
         width: 34px;

@@ -49,7 +49,7 @@ function clear(){
 
 function generate(){
     clear();
-    var bord = generateBord(20);
+    var bord = generateBord(16);
 
     var rows = document.getElementsByClassName("row");
     for(var i = 0; i < rows.length; i++){
@@ -104,41 +104,46 @@ function solve(){
 
 
 function generateBord(numberAmount){
-    var bord = [];
-    for(var y = 0; y < 9; y++){
-        bord.push([]);
-        for(var x = 0; x < 9; x++){
-            bord[y].push(0);
+    var initNumberAmount = numberAmount;
+
+    var hasSolution = false;
+    while(hasSolution == false){
+        var bord = [];
+        for(var y = 0; y < 9; y++){
+            bord.push([]);
+            for(var x = 0; x < 9; x++){
+                bord[y].push(0);
+            }
         }
-    }
+        
+        while(numberAmount > 0){
+            var x = parseInt(Math.random()*9, 10);
+            var y = parseInt(Math.random()*9, 10);
+            var n = parseInt(Math.random()*9, 10) + 1;
+            if(possible(x, y, n, bord) && bord[y][x] == 0){
+                bord[y][x] = n;
 
-    while(numberAmount > 0){
-        var x = parseInt(Math.random()*9, 10);
-        var y = parseInt(Math.random()*9, 10);
-        var n = parseInt(Math.random()*9, 10) + 1;
-        if(possible(x, y, n, bord) && bord[y][x] == 0){
-            bord[y][x] = n;
-
-            //temp bord.
-            var bordSolve = [];
-            for(var i = 0; i < 9; i++){
-                bordSolve.push([]);
-                for(var j = 0; j < 9; j++){
-                    bordSolve[i].push(0);
+                //temp bord.
+                var bordSolve = [];
+                for(var i = 0; i < 9; i++){
+                    bordSolve.push([]);
+                    for(var j = 0; j < 9; j++){
+                        bordSolve[i].push(0);
+                    }
                 }
-            }
-            for(var i = 0; i <  bord.length; i++){
-                for(var j = 0; j < bord[i].length; j++){
-                    bordSolve[i][j] = bord[i][j];
+                for(var i = 0; i <  bord.length; i++){
+                    for(var j = 0; j < bord[i].length; j++){
+                        bordSolve[i][j] = bord[i][j];
+                    }
                 }
-            }
-            //check if the bord can be solved.
-            if(isSolvable(bordSolve) == 1){
                 numberAmount--;
             }
-            else{
-                bord[y][x] = 0;
-            }
+        }
+        if(isSolvable(bordSolve) != 1){
+            numberAmount = initNumberAmount;
+        }
+        else{
+            hasSolution = true;
         }
     }
     return bord;
