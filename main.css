@@ -36,6 +36,7 @@ a{
     text-decoration: none;
     color: white;
     font-size: 24px;
+    transition-property: color;
 }
 a:hover{
     transition-duration: 180ms;
@@ -107,7 +108,7 @@ button{
     padding: 18px 0px;
     width: 240px;
     margin: 28px;
-    background: #4090ED;
+    background: #316eb3;
     color: white;
     font-size: 28px;
     border-radius: 12px;
@@ -129,7 +130,6 @@ button:hover{
     .sudoku{
         margin: 0px auto;
     }
-
     .cell-input{
         width: 50px;
         height: 50px;
@@ -153,14 +153,13 @@ button:hover{
 
 @media only screen and (max-width: 720px){
     .cell-input{
-        width: 38px;
-        height: 38px;
+        width: 34px;
+        height: 34px;
     }
 
     .active{
         color: white;
     }
-
     .active::before{
         position: relative;
         right: 20px;
@@ -189,19 +188,24 @@ button:hover{
         margin: auto;
         display: none;
         position: absolute;
-        top: 102px;
+        top: 0px;
         left: 0;
         width: 100%;
-        height: 100%;
+        height: 100vh;
         background: #3a3a3aea;
         padding: 0px;
-        padding-top: 200px;
+        padding-top: 0px;
+        z-index: 0;
     }
     .menu a{
         text-align: center;
-        margin-top:38px;
+        margin-top:50px;
         padding: 0px;
         display: block;
+        font-size: 30px;
+    }
+    .menu > div{
+        margin-top: 320px;
     }
 
     .hamburger{
@@ -217,7 +221,6 @@ button:hover{
         align-items: center;
         justify-content: center;
     }
-
     .hamburger > div{
         position: relative;
         width: 100%;
@@ -228,7 +231,6 @@ button:hover{
         justify-items: center;
         transition:all 400ms ease;
     }
-
     .hamburger > div::before,
     .hamburger > div::after{
         content: "";
@@ -246,17 +248,12 @@ button:hover{
     .toggle:checked + .hamburger > div{
         transform: rotate(135deg);
     }
-
     .toggle:checked + .hamburger > div:before,
     .toggle:checked + .hamburger > div:after{
-        transition: 200ms ease;
         top: 0;
         transform: rotate(90deg);
     }
-
     .toggle:checked ~ .menu{
         display: block;
     }
-    
-
 }
