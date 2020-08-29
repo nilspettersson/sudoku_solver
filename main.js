@@ -22,7 +22,7 @@ function getFile(e){
             formData.append("OCREngine", 2);
             //Send OCR Parsing request asynchronously
             jQuery.ajax({
-                url: "https:api.ocr.space/parse/image",
+                url: "https://api.ocr.space/parse/image",
                 data: formData,
                 dataType: 'json',
                 cache: false,
