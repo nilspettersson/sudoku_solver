@@ -8,6 +8,7 @@
         <meta name="description" content="Sudoku solver. Solving sudoku using backtraking">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link href='http://fonts.googleapis.com/css?family=Roboto' rel='noreferrer' type='text/css'>
 
         <link rel="stylesheet" href="main.css">
@@ -34,6 +35,13 @@
                 </div>
             </div>
         </div>
+
+        <form name = "form_input" enctype="multipart/form-data">
+
+            <input type="file" name="whocares" id="file" />
+            <button type="button" onclick="getFile(this)">Enter</button>
+            
+            </form>
 
         <div class="grid">
             <div class="left">
