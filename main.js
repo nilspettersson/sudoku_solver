@@ -58,8 +58,8 @@ function getFile(e){
                                 if(words[j].WordText == "|"){
                                     continue;
                                 }
-                                var column = Math.floor(((words[j].Left + words[j].Width / 2) / img.height) * 9);
-                                var row = Math.floor(((words[j].Top  + words[j].Height / 2) / img.height) * 9);
+                                var column = Math.floor(((words[j].Left + words[j].Width / 2) / img.width) * 9);
+                                var row = Math.floor(((words[j].Top  + words[j].Height / 2) / img.width) * 9);
                                 console.log(column + "  " + row);
                                 if(column > 8 || row > 8){
                                     console.log("bad");
