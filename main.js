@@ -39,6 +39,8 @@ function clear(){
         var row = document.getElementsByClassName("row")[i];
         for(var j = 0; j < row.childNodes.length; j++){
             row.childNodes[j].childNodes[0].value = "";
+            row.childNodes[j].childNodes[0].classList.replace("cell-generated", "cell-input");
+            row.childNodes[j].childNodes[0].readOnly = false;
         }
     }
 }
@@ -64,6 +66,8 @@ function generate(){
                 continue;
             }
             row.childNodes[j].childNodes[0].value = bord[i][j];
+            row.childNodes[j].childNodes[0].classList.replace("cell-input", "cell-generated");
+            row.childNodes[j].childNodes[0].readOnly = true;
         }
     }
 }
