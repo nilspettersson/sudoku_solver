@@ -1,13 +1,13 @@
 function init(){
     var sudoku = document.getElementsByClassName("sudoku")[0];
 
-    for(var i = 0; i < 9; i++){
+    for(let i = 0; i < 9; i++){
         var row = document.createElement("tr");
         row.classList.add("row");    
         if((i+1) % 3 == 0 && i < 8){
             row.classList.add("row-divider");
         }
-        for(var j = 0; j < 9; j++){
+        for(let j = 0; j < 9; j++){
             var cell = document.createElement("td");
             cell.classList.add("cell");
             if((j+1) % 3 == 0 && j < 8){
@@ -18,9 +18,14 @@ function init(){
             input.classList.add("cell-input");
             input.type = "text";
             input.maxLength = "1";
-            input.oninput= function (){
+            input.oninput = function (){
                 this.value=this.value.replace(/[^1-9]/g,'');
+                checkSame(this, j, i);
             };
+            input.onclick = function (){
+                checkSame(this, j, i);
+            };
+
             cell.append(input);
 
             row.append(cell);
@@ -33,6 +38,33 @@ function init(){
     document.getElementById("solve").onclick = function(){solve()};
 }
 
+function checkSame(input, currentColumn, currentRow){
+    var rows = document.getElementsByClassName("row");
+    for(let i = 0; i < rows.length; i++){
+        var row = document.getElementsByClassName("row")[i];
+        for(let j = 0; j < row.childNodes.length; j++){
+            if(input.value  == row.childNodes[j].childNodes[0].value && input.value != ""){
+                if((currentColumn == j && currentRow != i) || (currentColumn != j && currentRow == i)){
+                    row.childNodes[j].childNodes[0].style.background = "rgb(255 153 153)";
+                    let currentY = document.getElementsByClassName("row")[currentRow];
+                    currentY.childNodes[currentColumn].childNodes[0].style.background = "rgb(255 153 153)";
+                }
+                else if(Math.floor(currentColumn / 3) == Math.floor(j / 3) && Math.floor(currentRow / 3) == Math.floor(i / 3) && (currentRow != i && currentColumn != j)){
+                    row.childNodes[j].childNodes[0].style.background = "rgb(255 153 153)";
+                    let currentY = document.getElementsByClassName("row")[currentRow];
+                    currentY.childNodes[currentColumn].childNodes[0].style.background = "rgb(255 153 153)";
+                }
+                else{
+                    row.childNodes[j].childNodes[0].style.background = "rgb(186 218 255)";
+                }
+            }
+            else{
+                row.childNodes[j].childNodes[0].style.background = "white";
+            }
+        }
+    }
+}
+
 function clear(){
     var rows = document.getElementsByClassName("row");
     for(var i = 0; i < rows.length; i++){
@@ -41,6 +73,7 @@ function clear(){
             row.childNodes[j].childNodes[0].value = "";
             row.childNodes[j].childNodes[0].classList.replace("cell-generated", "cell-input");
             row.childNodes[j].childNodes[0].readOnly = false;
+            row.childNodes[j].childNodes[0].style.background = "white";
         }
     }
 }
