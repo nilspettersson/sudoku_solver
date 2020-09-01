@@ -102,9 +102,11 @@ a:hover{
 }
 
 .cell-input{
+    font-family: 'Architects Daughter', cursive;
+    font-size: 40px;
+    font-weight: bolder;
     outline: none;
     border: none;
-    font-size: 44px;
     color: rgb(70, 70, 70);
     text-align: center;
     width: 60px;
@@ -123,8 +125,8 @@ a:hover{
     cursor: default;
     outline: none;
     border: none;
-    font-size: 44px;
-    color: rgb(131, 131, 131);
+    font-size: 30px;
+    color: rgb(95, 95, 95);
     text-align: center;
     width: 60px;
     height: 60px;
